@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biodata Mahasantri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+  // Atur tema sebelum halaman tampil supaya tidak berkedip
+  (function(){
+    var t = null;
+    try { t = localStorage.getItem('tema'); } catch(e){}
+    if(!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+  :root{
+    --ink:#2a2347; --muted:#6f688f; --accent:#6d5dfc; --accent-2:#ff6fa5; --ok:#14a37f; --err:#e0446a;
+    --card:rgba(255,255,255,.62); --card-line:rgba(255,255,255,.85);
+    --field:rgba(255,255,255,.85); --field-line:rgba(109,93,252,.22);
+    --bg1:#ffe3ec; --bg2:#e4dcff; --bg3:#d4f3ff;
+    --b1:#ffb3c8; --b2:#b9a8ff; --b3:#a8e8d6; --b4:#ffd9a8;
+    --shadow:0 20px 60px rgba(109,93,252,.22);
+    --orb:radial-gradient(circle at 35% 35%,#fff7c7 0,#ffd36b 45%,#ff9d7a 100%);
+    --orb-glow:0 0 90px 40px rgba(255,190,120,.55);
+    --stars:0; --grain:.07;
+  }
+  [data-theme=dark]{
+    --ink:#ece9ff; --muted:#a49fce; --accent:#9d8cff; --accent-2:#ff7eb6; --ok:#4fe3b8; --err:#ff7a9c;
+    --card:rgba(26,22,62,.62); --card-line:rgba(160,145,255,.22);
+    --field:rgba(12,10,36,.55); --field-line:rgba(160,145,255,.3);
+    --bg1:#0d0b24; --bg2:#1a1550; --bg3:#0a1a3a;
+    --b1:#5b3df0; --b2:#d1408f; --b3:#1696a8; --b4:#3a2a8f;
+    --shadow:0 24px 70px rgba(0,0,0,.55);
+    --orb:radial-gradient(circle at 36% 34%,#fffdf0 0,#e9e6ff 55%,#b9b4e8 100%);
+    --orb-glow:0 0 80px 28px rgba(170,160,255,.35);
+    --stars:1; --grain:.12;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{font:16px/1.6 Nunito,ui-rounded,"Segoe UI",system-ui,sans-serif;color:var(--ink);
+    background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));background-attachment:fixed;
+    transition:color .5s,background .5s;overflow-x:hidden;min-height:100vh}
+ 
+  /* ===== Latar estetik ===== */
+  .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;transition:background .6s,opacity .6s;animation:drift 22s ease-in-out infinite alternate}
+  .blob.a{width:46vmax;height:46vmax;left:-12vmax;top:-14vmax;background:var(--b1)}
+  .blob.b{width:40vmax;height:40vmax;right:-10vmax;top:18vh;background:var(--b2);animation-duration:27s;animation-delay:-6s}
+  .blob.c{width:38vmax;height:38vmax;left:12vw;bottom:-18vmax;background:var(--b3);animation-duration:31s;animation-delay:-12s}
+  .blob.d{width:26vmax;height:26vmax;right:20vw;bottom:-8vmax;background:var(--b4);animation-duration:24s;animation-delay:-3s;opacity:.55}
+  @keyframes drift{to{transform:translate(6vmax,-5vmax) scale(1.12)}}
+ 
+  .orb{position:absolute;width:112px;height:112px;border-radius:50%;right:9vw;top:9vh;background:var(--orb);box-shadow:var(--orb-glow);transition:all .6s}
+  [data-theme=dark] .orb::before,[data-theme=dark] .orb::after{content:"";position:absolute;border-radius:50%;background:rgba(120,110,190,.28)}
+  [data-theme=dark] .orb::before{width:26px;height:26px;left:24px;top:30px}
+  [data-theme=dark] .orb::after{width:16px;height:16px;right:26px;bottom:28px}
+ 
+  .stars{position:absolute;inset:0;opacity:var(--stars);transition:opacity .8s}
+  .stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 3.5s ease-in-out infinite}
+  @keyframes tw{50%{opacity:.2;transform:scale(.6)}}
+ 
+  .grain{position:absolute;inset:0;opacity:var(--grain);mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+ 
+  /* ===== Tombol tema ===== */
+  .theme{position:fixed;top:16px;right:16px;z-index:5;display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;
+    border-radius:999px;border:1px solid var(--card-line);background:var(--card);color:var(--ink);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer;font:600 14px Nunito,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.1)}
+  .theme svg{width:22px;height:22px}
+  .theme .moon{display:none} [data-theme=dark] .theme .sun{display:none} [data-theme=dark] .theme .moon{display:block}
+ 
+  /* ===== Kartu form ===== */
+  main{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:72px 18px 60px}
+  .card{background:var(--card);border:1px solid var(--card-line);border-radius:28px;padding:34px 30px 30px;
+    backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);box-shadow:var(--shadow);transition:background .5s,border-color .5s}
+  h1{font:600 34px/1.15 Fredoka,ui-rounded,sans-serif;margin:0 0 6px;letter-spacing:.2px}
+  .sub{margin:0 0 22px;color:var(--muted)}
+ 
+  .progress{margin-bottom:26px}
+  .progress .row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);margin-bottom:7px}
+  .bar{height:10px;border-radius:99px;background:var(--field);border:1px solid var(--field-line);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .5s cubic-bezier(.3,1.4,.5,1)}
+ 
+  .field{margin-bottom:20px}
+  .field > label,.field > .lab{display:block;font-weight:700;margin-bottom:7px}
+  .opt{font-weight:400;color:var(--muted);font-size:13.5px}
+  input[type=text],input[type=email],select,textarea{width:100%;padding:13px 16px;border-radius:16px;border:1.5px solid var(--field-line);
+    background:var(--field);color:var(--ink);font:inherit;transition:border-color .2s,box-shadow .2s,background .5s}
+  textarea{min-height:104px;resize:vertical}
+  select{appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+    background-position:calc(100% - 22px) 52%,calc(100% - 16px) 52%;background-size:6px 6px;background-repeat:no-repeat;padding-right:42px}
+  ::placeholder{color:var(--muted);opacity:.75}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 24%,transparent)}
+  [aria-invalid=true]{border-color:var(--err)!important}
+  .msg{display:none;margin:6px 4px 0;font-size:13.5px;color:var(--err)}
+  .msg.show{display:block}
+ 
+  /* Pilihan berbentuk kartu/chip */
+  .choices{display:flex;flex-wrap:wrap;gap:10px}
+  .choices.two{display:grid;grid-template-columns:1fr 1fr}
+  .choices input{position:absolute;opacity:0;pointer-events:none}
+  .chip span{display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:16px;border:1.5px solid var(--field-line);background:var(--field);
+    cursor:pointer;font-weight:600;transition:transform .15s,background .2s,border-color .2s,box-shadow .2s;user-select:none}
+  .chip span b{font-size:20px;font-weight:400}
+  .chip span:hover{transform:translateY(-2px)}
+  .chip input:checked + span{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 20%,var(--field));box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 30%,transparent)}
+  .chip input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
+  .choices.two .chip span{flex-direction:column;text-align:center;gap:4px;padding:16px 10px}
+  .choices.two .chip span b{font-size:28px}
+ 
+  .submit{width:100%;margin-top:8px;padding:15px 20px;border:0;border-radius:18px;cursor:pointer;color:#fff;font:600 18px Fredoka,ui-rounded,sans-serif;
+    background:linear-gradient(100deg,var(--accent),var(--accent-2));box-shadow:0 12px 28px color-mix(in srgb,var(--accent) 40%,transparent);transition:transform .15s,box-shadow .2s}
+  .submit:hover{transform:translateY(-2px);box-shadow:0 16px 34px color-mix(in srgb,var(--accent) 50%,transparent)}
+  .submit:active{transform:translateY(0) scale(.99)}
+  .submit:focus-visible,.theme:focus-visible,.again:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+  .note{text-align:center;margin:14px 0 0;color:var(--muted);font-size:13.5px}
+ 
+  /* ===== Tampilan sukses ===== */
+  .done{display:none;text-align:center}
+  .done.show{display:block;animation:pop .5s cubic-bezier(.3,1.5,.5,1)}
+  @keyframes pop{from{opacity:0;transform:scale(.92) translateY(10px)}}
+  .done .big{font-size:60px;line-height:1;margin-bottom:8px}
+  .sum{text-align:left;margin:20px 0;padding:16px 18px;border-radius:18px;background:var(--field);border:1.5px solid var(--field-line)}
+  .sum div{display:flex;gap:10px;padding:5px 0}
+  .sum dt,.sum span.k{min-width:118px;color:var(--muted)}
+  .sum span.v{font-weight:700;word-break:break-word}
+  .again{padding:12px 26px;border-radius:16px;border:1.5px solid var(--accent);background:transparent;color:var(--ink);font:700 15px Nunito,sans-serif;cursor:pointer}
+  .again:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+ 
+  @media (max-width:520px){
+    .card{padding:26px 18px 22px;border-radius:22px} h1{font-size:28px}
+    .theme span{display:none} .theme{padding:9px}
+    .orb{width:76px;height:76px;right:6vw;top:7vh}
+    .sum div{flex-direction:column;gap:0}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+ 
+<div class="scene" aria-hidden="true">
+  <div class="blob a"></div><div class="blob b"></div><div class="blob c"></div><div class="blob d"></div>
+  <div class="stars" id="stars"></div>
+  <div class="orb"></div>
+  <div class="grain"></div>
+</div>
+ 
+<button class="theme" id="theme" type="button" aria-label="Ganti tema terang atau gelap">
+  <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+  <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+  <span id="themeLabel">Mode gelap</span>
+</button>
+ 
+<main>
+  <section class="card" id="formCard">
+    <h1>Halo, Mahasantri! 👋</h1>
+    <p class="sub">Santai aja, kenalan dulu yuk. Isinya cuma sebentar kok.</p>
+ 
+    <div class="progress" aria-live="polite">
+      <div class="row"><span id="pText">Belum ada yang terisi</span><span id="pPct">0%</span></div>
+      <div class="bar"><i id="pBar"></i></div>
+    </div>
+ 
+    <form id="biodata" novalidate>
+      <div class="field">
+        <label for="nama">Siapa namamu?</label>
+        <input id="nama" type="text" placeholder="Nama lengkap" autocomplete="name">
+        <div class="msg" id="e-nama">Nama belum diisi, tulis dulu ya.</div>
+      </div>
+ 
+      <div class="field">
+        <label for="nim">NIM</label>
+        <input id="nim" type="text" inputmode="numeric" placeholder="Contoh: 2024010123" maxlength="15">
+        <div class="msg" id="e-nim">NIM harus angka, 8–15 digit.</div>
+      </div>
+ 
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="nama@email.com" autocomplete="email">
+        <div class="msg" id="e-email">Alamat emailnya kayaknya belum pas, cek lagi ya.</div>
+      </div>
+ 
+      <div class="field">
+        <div class="lab" id="l-jur">Ambil jurusan apa?</div>
+        <div class="choices two" role="radiogroup" aria-labelledby="l-jur">
+          <label class="chip"><input type="radio" name="jurusan" value="Software Development"><span><b>💻</b>Software Development</span></label>
+          <label class="chip"><input type="radio" name="jurusan" value="Digital Marketing"><span><b>📣</b>Digital Marketing</span></label>
+        </div>
+        <div class="msg" id="e-jur">Pilih salah satu jurusan dulu ya.</div>
+      </div>
+ 
+      <div class="field">
+        <label for="mk">Mata kuliah favorit semester ini</label>
+        <select id="mk">
+          <option value="">Pilih mata kuliah…</option>
+          <option>Web Design</option>
+          <option>Data Base SQL</option>
+          <option>Pemrograman PHP</option>
+          <option>Pemrograman Python</option>
+        </select>
+        <div class="msg" id="e-mk">Pilih satu mata kuliah ya.</div>
+      </div>
+ 
+      <div class="field">
+        <div class="lab" id="l-hobi">Hobi <span class="opt">(boleh lebih dari satu)</span></div>
+        <div class="choices" role="group" aria-labelledby="l-hobi">
+          <label class="chip"><input type="checkbox" name="hobi" value="Mancing"><span><b>🎣</b>Mancing</span></label>
+          <label class="chip"><input type="checkbox" name="hobi" value="Olahraga"><span><b>🏃</b>Olahraga</span></label>
+          <label class="chip"><input type="checkbox" name="hobi" value="Membaca"><span><b>📚</b>Membaca</span></label>
+          <label class="chip"><input type="checkbox" name="hobi" value="Menonton"><span><b>🎬</b>Menonton</span></label>
+        </div>
+      </div>
+ 
+      <div class="field">
+        <label for="alamat">Tinggal di mana?</label>
+        <textarea id="alamat" placeholder="Jalan, RT/RW, kelurahan, kota"></textarea>
+        <div class="msg" id="e-alamat">Alamat masih kosong atau terlalu singkat.</div>
+      </div>
+ 
+      <button class="submit" type="submit">Kirim biodata ✨</button>
+      <p class="note">Datamu aman dan hanya dipakai untuk keperluan kampus.</p>
+    </form>
+  </section>
+ 
+  <section class="card done" id="done" role="status" aria-live="polite">
+    <div class="big">🎉</div>
+    <h1 id="dTitle">Makasih!</h1>
+    <p class="sub">Biodatamu sudah kami terima. Ini ringkasannya:</p>
+    <div class="sum" id="sum"></div>
+    <button class="again" id="again" type="button">Isi untuk orang lain</button>
+  </section>
+</main>
+ 
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id)};
+  var root = document.documentElement;
+ 
+  /* Bintang untuk mode gelap */
+  var st = $('stars');
+  for(var i=0;i<70;i++){
+    var s = document.createElement('i');
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    var z = Math.random()*2+1.5;
+    s.style.width = s.style.height = z+'px';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    s.style.animationDuration = (2.5+Math.random()*3)+'s';
+    st.appendChild(s);
+  }
+ 
+  /* Ganti tema */
+  function label(){ $('themeLabel').textContent = root.getAttribute('data-theme')==='dark' ? 'Mode terang' : 'Mode gelap'; }
+  label();
+  $('theme').addEventListener('click', function(){
+    var next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('tema', next); } catch(e){}
+    label();
+  });
+ 
+  /* Progres pengisian */
+  var form = $('biodata');
+  function filled(){
+    var r = [
+      $('nama').value.trim().length>=3,
+      /^\d{8,15}$/.test($('nim').value.trim()),
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('email').value.trim()),
+      !!form.querySelector('input[name=jurusan]:checked'),
+      !!$('mk').value,
+      $('alamat').value.trim().length>=10
+    ];
+    return r.filter(Boolean).length;
+  }
+  function progress(){
+    var n = filled(), pct = Math.round(n/6*100);
+    $('pBar').style.width = pct+'%';
+    $('pPct').textContent = pct+'%';
+    $('pText').textContent = n===0 ? 'Belum ada yang terisi' : n===6 ? 'Lengkap! Tinggal kirim 🚀' : n+' dari 6 sudah terisi';
+  }
+  form.addEventListener('input', progress);
+  form.addEventListener('change', progress);
+ 
+  /* Validasi */
+  function flag(el, id, bad){
+    $(id).classList.toggle('show', bad);
+    if(el) el.setAttribute('aria-invalid', bad?'true':'false');
+    return bad;
+  }
+  ['nama','nim','email','mk','alamat'].forEach(function(id){
+    $(id).addEventListener('input', function(){ this.removeAttribute('aria-invalid'); $('e-'+id).classList.remove('show'); });
+  });
+  form.addEventListener('change', function(e){ if(e.target.name==='jurusan') $('e-jur').classList.remove('show'); });
+ 
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var first = null;
+    function chk(bad, el, id){ if(flag(el,id,bad) && !first) first = el; }
+    chk($('nama').value.trim().length<3, $('nama'), 'e-nama');
+    chk(!/^\d{8,15}$/.test($('nim').value.trim()), $('nim'), 'e-nim');
+    chk(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('email').value.trim()), $('email'), 'e-email');
+    chk(!form.querySelector('input[name=jurusan]:checked'), form.querySelector('input[name=jurusan]'), 'e-jur');
+    chk(!$('mk').value, $('mk'), 'e-mk');
+    chk($('alamat').value.trim().length<10, $('alamat'), 'e-alamat');
+    if(first){ first.focus(); return; }
+ 
+    var jur = form.querySelector('input[name=jurusan]:checked').value;
+    var hobi = Array.prototype.map.call(form.querySelectorAll('input[name=hobi]:checked'), function(c){return c.value}).join(', ') || '-';
+    var depan = $('nama').value.trim().split(/\s+/)[0];
+    $('dTitle').textContent = 'Makasih, '+depan+'!';
+ 
+    var rows = [['Nama',$('nama').value.trim()],['NIM',$('nim').value.trim()],['Email',$('email').value.trim()],
+                ['Jurusan',jur],['Mata kuliah',$('mk').value],['Hobi',hobi],['Alamat',$('alamat').value.trim()]];
+    var sum = $('sum'); sum.textContent = '';
+    rows.forEach(function(r){
+      var d = document.createElement('div');
+      var k = document.createElement('span'); k.className='k'; k.textContent=r[0];
+      var v = document.createElement('span'); v.className='v'; v.textContent=r[1];
+      d.appendChild(k); d.appendChild(v); sum.appendChild(d);
+    });
+ 
+    $('formCard').style.display='none';
+    $('done').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+    // Untuk mengirim ke server: fetch('/simpan',{method:'POST',body:new FormData(form)})
+  });
+ 
+  $('again').addEventListener('click', function(){
+    form.reset();
+    form.querySelectorAll('[aria-invalid]').forEach(function(i){i.removeAttribute('aria-invalid')});
+    document.querySelectorAll('.msg').forEach(function(m){m.classList.remove('show')});
+    progress();
+    $('done').classList.remove('show');
+    $('formCard').style.display='';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
+ 
