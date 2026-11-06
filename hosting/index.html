@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Vitae - Sony Fybrian Maulana</title>
+  
+  <!-- Font Modern -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* RESET & DASAR */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0b1528 0%, #040814 100%);
+      --accent-primary: #0284c7;
+      --accent-secondary: #38bdf8;
+      --glow-color: rgba(56, 189, 248, 0.15);
+      --card-bg: rgba(15, 23, 42, 0.4);
+      --border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-gradient);
+      color: #e2e8f0;
+      line-height: 1.6;
+      padding: 50px 15px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* BACKGROUND ORNAMENT (ANIMASI) */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+      opacity: 0.15;
+      filter: blur(80px);
+      z-index: -1;
+      animation: floatOrbit 18s infinite alternate ease-in-out;
+    }
+
+    body::before { top: -10%; left: -10%; }
+    body::after { bottom: -10%; right: -10%; animation-delay: -6s; }
+
+    @keyframes floatOrbit {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(30px) scale(1.1); }
+    }
+
+    /* CONTAINER UTAMA */
+    .cv-card {
+      max-width: 920px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      position: relative;
+      animation: zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* SIDEBAR (KOLOM KIRI) */
+    .sidebar {
+      background: rgba(10, 17, 32, 0.8);
+      border-right: 1px solid var(--border-color);
+      padding: 40px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* PROFIL BORDER GLOW (ANIMATED) */
+    .profile-glow {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), #818cf8);
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite, pulseBorder 3s infinite;
+      box-shadow: 0 10px 30px var(--glow-color);
+      margin-bottom: 24px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 15px var(--glow-color); }
+      50% { box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); }
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid #0a1120;
+    }
+
+    .sidebar h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+
+    .sidebar .status {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 30px;
+    }
+
+    /* MENU / INFO SIDEBAR */
+    .side-section {
+      width: 100%;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .side-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .side-title::after {
+      content: "";
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-item {
+      margin-bottom: 15px;
+      font-size: 0.88rem;
+    }
+
+    .info-item span {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .info-item a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .info-item a:hover {
+      color: var(--accent-secondary);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(30, 41, 59, 0.5);
+      color: #e2e8f0;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin: 3px 2px;
+      transition: all 0.3s;
+    }
+
+    .tag:hover {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: var(--accent-secondary);
+      transform: translateY(-2px);
+    }
+
+    /* KONTEN UTAMA */
+    .main-content {
+      padding: 45px 40px;
+    }
+
+    .main-section {
+      margin-bottom: 35px;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex-grow: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--accent-primary), transparent);
+    }
+
+    .about-text {
+      font-size: 0.92rem;
+      color: #94a3b8;
+      text-align: justify;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    /* TIMELINE / PENGALAMAN */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 24px;
+      border-left: 1.5px solid rgba(56, 189, 248, 0.3);
+      transition: all 0.3s;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -5.5px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      border: 2px solid #040814;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .timeline-item:hover {
+      border-left-color: var(--accent-secondary);
+    }
+
+    .timeline-item:hover::before {
+      background: var(--accent-secondary);
+      transform: scale(1.3);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+
+    .timeline-role {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    .timeline-time {
+      font-size: 0.8rem;
+      color: var(--accent-secondary);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .timeline-sub {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 820px) {
+      .cv-card {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 40px 30px;
+      }
+      .main-content {
+        padding: 35px 25px;
+      }
+      body {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cv-card">
+    
+    <!-- KOLOM KIRI (SIDEBAR) -->
+    <aside class="sidebar">
+      
+      <!-- Profil Border & Foto dari User -->
+      <div class="profile-glow">
+        <img class="profile-img" src="image_3.png" alt="Sony Fybrian Maulana">
+      </div>
+
+      <h1>Sony Fybrian Maulana</h1>
+      <p class="status">Software Engineering</p>
+
+      <!-- Informasi Kontak -->
+      <div class="side-section">
+        <h2 class="side-title">Kontak</h2>
+        <ul class="info-list">
+          <li class="info-item">
+            <span>Lokasi</span>
+            Banyuwangi, Jawa Timur
+          </li>
+          <li class="info-item">
+            <span>Email</span>
+            <a href="mailto:sonymaulana75@gmail.com">sonymaulana75@gmail.com</a>
+          </li>
+          <li class="info-item">
+            <span>WhatsApp</span>
+            <a href="https://wa.me/6287749899629" target="_blank">+62 877-4989-9629</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Keahlian -->
+      <div class="side-section">
+        <h2 class="side-title">Keahlian</h2>
+        <div style="margin-top: 5px;">
+          <span class="tag">HTML5 & CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Git & GitHub</span>
+          <span class="tag">UI/UX Design</span>
+          <span class="tag">Web Development</span>
+          <span class="tag">Responsive Design</span>
+        </div>
+      </div>
+
+      <!-- Bahasa -->
+      <div class="side-section" style="margin-bottom: 0;">
+        <h2 class="side-title">Bahasa</h2>
+        <ul class="info-list" style="font-size: 0.82rem; color: #94a3b8;">
+          <li style="margin-bottom: 6px;">🇮🇩 Bahasa Indonesia <span style="color: var(--accent-secondary); font-size: 0.72rem;">(Native)</span></li>
+          <li>🇬🇧 Bahasa Inggris <span style="color: #64748b; font-size: 0.72rem;">(Pasif)</span></li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <!-- KOLOM KANAN (ISI UTAMA) -->
+    <main class="main-content">
+      
+      <!-- Tentang Saya -->
+      <section class="main-section" style="animation-delay: 0.1s;">
+        <h3 class="section-title">Tentang Saya</h3>
+        <p class="about-text">
+          Pengembang antarmuka web dan rekayasa perangkat lunak yang berfokus pada pembangunan solusi digital yang rapi, modern, dan fungsional. Terbiasa memadukan logika terstruktur dengan estetika UI/UX yang intuitif, serta memiliki komitmen kuat terhadap penulisan kode yang bersih dan pemecahan masalah secara terorganisir.
+        </p>
+      </section>
+
+      <!-- Pengalaman & Proyek -->
+      <section class="main-section" style="animation-delay: 0.2s;">
+        <h3 class="section-title">Pengalaman & Proyek</h3>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-role">Web Landing Page Developer</span>
+              <span class="timeline-time">2026</span>
+            </div>
+            <div class="timeline-sub">Proyek UMKM & Solusi Digital</div>
+            <p class="timeline-desc">
+              Merancang antarmuka landing page responsif terintegrasi dengan otomatisasi pemesanan WhatsApp. Menerapkan optimasi layout mobile-first dan arsitektur kode CSS yang terstruktur.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-role">Administrasi & Manajemen Operasional</span>
+              <span class="timeline-time">Organisasi</span>
+            </div>
+            <div class="timeline-sub">Tata Kelola Anggaran & Proyek</div>
+            <p class="timeline-desc">
+              Mengelola pencatatan administrasi, penyusunan rancangan anggaran kegiatan, serta koordinasi teknis pelaksanaan program kerja kepanitiaan secara sistematis.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Pendidikan -->
+      <section class="main-section" style="animation-delay: 0.3s; margin-bottom: 0;">
+        <h3 class="section-title">Pendidikan</h3>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-role">Pengembangan Perangkat Lunak (PPL)</span>
+              <span class="timeline-time">Fokus Kejuruan</span>
+            </div>
+            <p class="timeline-desc">
+              Mempelajari struktur data, siklus hidup pengembangan perangkat lunak (SDLC), kontrol versi berbasis Git, dan pengembangan web modern.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
