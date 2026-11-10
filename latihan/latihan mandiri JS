@@ -1,0 +1,8 @@
+function celciusKeFahrenheit(celcius) {
+  return (celcius * 9/5) + 32;
+}
+onst suhuCelcius = 30;
+const suhuFahrenheit = celciusKeFahrenheit(suhuCelcius);
+
+console.log(`${suhuCelcius}°C = ${suhuFahrenheit}°F`);
+// Output: 30°C = 86°F
